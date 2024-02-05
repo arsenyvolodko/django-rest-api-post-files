@@ -9,7 +9,7 @@ WORKDIR /app
 #RUN pip install psycopg2-binary
 #RUN pip install dj_database_url
 
-RUN poetry shell
+RUN poetry config virtualenvs.create false
 RUN poetry install --no-root
 
 COPY . .
