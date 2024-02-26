@@ -30,9 +30,9 @@ WORKDIR /app
 
 COPY pyproject.toml poetry.lock ./
 
-RUN poetry install --without dev --no-root && rm -rf $POETRY_CACHE_DIR
+RUN poetry install --no-root && rm -rf $POETRY_CACHE_DIR
 
 COPY django_api_files ./django_api_files
 COPY manage.py ./
 
-RUN poetry install --without dev
+CMD ["poetry", "run", "gunicorn", "django_api_files.wsgi:application", "--bind", "0.0.0.0:8000"]
